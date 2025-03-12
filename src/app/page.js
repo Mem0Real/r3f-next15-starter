@@ -11,7 +11,7 @@ export default function Home() {
 				<Suspense fallback={null}>
 					<Box position={[-2, 0, 0]} color="black" />
 					<Box position={[2, 0, 0]} color="blue" />
-					<Common color="grey" />
+					<Common color="grey" sky ground />
 				</Suspense>
 			</View>
 		</div>
