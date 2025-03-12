@@ -1,35 +1,26 @@
 "use client";
 
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
+import { Common } from "@/r3f/components/canvas/Common";
+import { View } from "@/r3f/components/canvas/View";
+import { Suspense, useRef } from "react";
 
 export default function Home() {
 	return (
-		<div className="min-h-screen w-screen flex flex-col justify-center items-center">
-			<h1 className="text-4xl">Hello</h1>
-
-			<Canvas>
-				<ambientLight intensity={Math.PI / 2} />
-				<spotLight
-					position={[10, 10, 10]}
-					angle={0.15}
-					penumbra={1}
-					decay={0}
-					intensity={Math.PI}
-				/>
-				<pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
-				<Box position={[-4.2, 0, 0]} color="black" />
-				<Box position={[4.2, 0, 0]} color="lightblue" />
-				<PerspectiveCamera makeDefault args={[40]} position={[-2, 2, 10]} />
-				<OrbitControls enableZoom={false} />
-			</Canvas>
+		<div className="w-full min-h-screen">
+			<View orbit className="w-full h-screen">
+				<Suspense fallback={null}>
+					<Box position={[-2, 0, 0]} color="black" />
+					<Box position={[2, 0, 0]} color="blue" />
+					<Common color="grey" />
+				</Suspense>
+			</View>
 		</div>
 	);
 }
 
 const Box = ({ color, ...props }) => (
 	<mesh {...props}>
-		<boxGeometry args={[2, 2, 2]} />
+		<boxGeometry />
 		<meshStandardMaterial color={color} />
 	</mesh>
 );
